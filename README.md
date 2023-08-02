@@ -1,4 +1,4 @@
-# astcrt
+# ASTC实时压缩
 
 ASTC实时压缩，LDR RGB/RGBA 支持透明通道
 
