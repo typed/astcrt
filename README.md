@@ -11,5 +11,4 @@ ASTC实时压缩，LDR RGB/RGBA<br>
 Block4x4<br>
 single partition<br>
 带alpha为QUANT\_6, QUANT\_256，不带alpha为QUANT\_12, QUANT\_256<br>
-https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression<br>
 
