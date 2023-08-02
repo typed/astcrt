@@ -98,9 +98,7 @@ inline bool is_solid(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec3i_t& color) {
         color.g += texels[i].channels.g;
         color.b += texels[i].channels.b;
     }
-    color.r = clamp<int>(0, 255, color.r / BLOCK_TEXEL_COUNT);
-    color.g = clamp<int>(0, 255, color.g / BLOCK_TEXEL_COUNT);
-    color.b = clamp<int>(0, 255, color.b / BLOCK_TEXEL_COUNT);
+    color = clamp_rgb(color / (int)BLOCK_TEXEL_COUNT);
     return true;
 }
 
@@ -161,7 +159,7 @@ inline bool is_alpha0(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4i_t& color) 
         color.g += texels[i].channels.g;
         color.b += texels[i].channels.b;
     }
-    color = clamp_rgba(color);
+    color = clamp_rgba(color / (int)BLOCK_TEXEL_COUNT);
     return true;
 }
 
