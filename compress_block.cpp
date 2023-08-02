@@ -88,14 +88,19 @@ inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT]
 }
 
 //是否为相同颜色
-inline bool is_solid(const unorm8_t texels[BLOCK_TEXEL_COUNT], unorm8_t* color) {
+inline bool is_solid(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec3i_t& color) {
+    color = vec3i_t(0, 0, 0);
     for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         if (!approx_equal(to_vec3i(texels[i]), to_vec3i(texels[0]))) {
             return false;
         }
+        color.r += texels[i].channels.r;
+        color.g += texels[i].channels.g;
+        color.b += texels[i].channels.b;
     }
-    // TODO: Calculate average color?
-    *color = texels[0];
+    color.r = clamp<int>(0, 255, color.r / BLOCK_TEXEL_COUNT);
+    color.g = clamp<int>(0, 255, color.g / BLOCK_TEXEL_COUNT);
+    color.b = clamp<int>(0, 255, color.b / BLOCK_TEXEL_COUNT);
     return true;
 }
 
@@ -114,9 +119,9 @@ inline bool is_greyscale(const unorm8_t texels[BLOCK_TEXEL_COUNT], uint8_t lumin
 
 void compress_block(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock* physical_block) {
     {
-        unorm8_t color;
-        if (is_solid(texels, &color)) {
-            encode_void_extent(to_vec3i(color), physical_block);
+        vec3i_t color;
+        if (is_solid(texels, color)) {
+            encode_void_extent(color, physical_block);
             /* encode_void_extent(vec3i_t(0, 0, 0), physical_block); */
             return;
         }
@@ -147,12 +152,16 @@ inline void encode_void_extent(vec4i_t color, PhysicalBlock* physical_block) {
 
 //是否为全透明
 inline bool is_alpha0(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4i_t& color) {
+    color = vec4i_t(0, 0, 0, 0);
     for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         if (texels[i].channels.a > 0) {
             return false;
         }
+        color.r += texels[i].channels.r;
+        color.g += texels[i].channels.g;
+        color.b += texels[i].channels.b;
     }
-    color = vec4i_t(0, 0, 0, 0);
+    color = clamp_rgba(color);
     return true;
 }
 
