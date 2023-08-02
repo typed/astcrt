@@ -89,8 +89,7 @@ inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT]
 
 //是否为相同颜色
 inline bool is_solid(const unorm8_t texels[BLOCK_TEXEL_COUNT], unorm8_t* color) {
-    size_t count = BLOCK_TEXEL_COUNT;
-    for (size_t i = 0; i < count; ++i) {
+    for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         if (!approx_equal(to_vec3i(texels[i]), to_vec3i(texels[0]))) {
             return false;
         }
@@ -102,8 +101,7 @@ inline bool is_solid(const unorm8_t texels[BLOCK_TEXEL_COUNT], unorm8_t* color) 
 
 //是否为灰度
 inline bool is_greyscale(const unorm8_t texels[BLOCK_TEXEL_COUNT], uint8_t luminances[BLOCK_TEXEL_COUNT]) {
-    size_t count = BLOCK_TEXEL_COUNT;
-    for (size_t i = 0; i < count; ++i) {
+    for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         vec3i_t color = to_vec3i(texels[i]);
         luminances[i] = static_cast<uint8_t>(luminance(color));
         vec3i_t lum(luminances[i], luminances[i], luminances[i]);
@@ -149,8 +147,7 @@ inline void encode_void_extent(vec4i_t color, PhysicalBlock* physical_block) {
 
 //是否为全透明
 inline bool is_alpha0(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4i_t& color) {
-    size_t count = BLOCK_TEXEL_COUNT;
-    for (size_t i = 0; i < count; ++i) {
+    for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         if (texels[i].channels.a > 0) {
             return false;
         }

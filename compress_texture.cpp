@@ -44,7 +44,7 @@ inline void fetch_image_block(const unorm8_t* source, size_t image_width, size_t
 }
 
 //是否透明
-bool has_transparent(const unorm8_t texels[BLOCK_TEXEL_COUNT]) {
+inline bool has_transparent(const unorm8_t texels[BLOCK_TEXEL_COUNT]) {
     for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         if (texels[i].channels.a < 255) {
             return true;

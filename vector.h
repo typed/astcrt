@@ -147,6 +147,8 @@ inline T qd_to_line(const vec3_t<T>& m, const vec3_t<T>& k, T kk, const vec3_t<T
     return qd(p, q);
 }
 
+//suppost alpha
+
 template <typename T>
 union vec4_t {
 public:

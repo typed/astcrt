@@ -9,7 +9,8 @@
 #include "range.h"
 #include "vector.h"
 
-inline int color_channel_sum(const vec3i_t& color) {
+template<typename T> //T vec3i_t or vec4i_t
+inline int color_channel_sum(const T& color) {
     return color.r + color.g + color.b;
 }
 
@@ -53,10 +54,6 @@ inline void encode_rgb_direct(range_t endpoint_quant, const vec3i_t& e0, const v
 }
 
 //suppost alpha
-
-inline int color_channel_sum(const vec4i_t& color) {
-    return color.r + color.g + color.b /*+ color.a*/;
-}
 
 inline void encode_rgba_direct(range_t endpoint_quant, const vec4i_t& e0, const vec4i_t& e1, uint8_t endpoint_quantized[8], vec4i_t endpoint_unquantized[2]) {
     vec4i_t e0q = quantize_color(endpoint_quant, e0);

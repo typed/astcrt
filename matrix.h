@@ -51,6 +51,8 @@ inline void eigen_vector(const mat3x3f_t& a, vec3f_t& eig) {
     eig = b;
 }
 
+//suppost alpha
+
 struct mat4x4f_t {
 public:
     mat4x4f_t() {}
