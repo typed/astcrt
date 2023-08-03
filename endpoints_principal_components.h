@@ -20,7 +20,7 @@ inline vec3f_t mean(const unorm8_t texels[BLOCK_TEXEL_COUNT]) {
     return to_vec3f(sum) / static_cast<float>(BLOCK_TEXEL_COUNT);
 }
 
-inline void subtract(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec3f_t v, vec3f_t output[BLOCK_TEXEL_COUNT]) {
+inline void subtract(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec3f_t& v, vec3f_t output[BLOCK_TEXEL_COUNT]) {
     for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         output[i] = to_vec3f(texels[i]) - v;
     }
@@ -79,7 +79,7 @@ inline mat4x4f_t covariance(const vec4f_t m[BLOCK_TEXEL_COUNT]) {
     return cov;
 }
 
-inline void subtract(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4f_t v, vec4f_t output[BLOCK_TEXEL_COUNT]) {
+inline void subtract(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec4f_t& v, vec4f_t output[BLOCK_TEXEL_COUNT]) {
     for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         output[i] = to_vec4f(texels[i]) - v;
     }
