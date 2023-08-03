@@ -98,13 +98,13 @@ public:
     }
 
     // Specialized function that can't write more than 8 bits.
-    void write8(uint8_t number, size_t bitcount) {
+    inline void write8(uint8_t number, size_t bitcount) {
         orbits8_ptr(ptr_, bitoffset_, number, bitcount);
 
         bitoffset_ += bitcount;
     }
 
-    size_t offset() const { return bitoffset_; }
+    inline size_t offset() const { return bitoffset_; }
 
 private:
     uint8_t* ptr_;

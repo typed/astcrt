@@ -26,10 +26,10 @@ public:
         m[2] = vec3f_t(m20, m21, m22);
     }
 
-    const vec3f_t& row(size_t i) const { return m[i]; }
+    inline const vec3f_t& row(size_t i) const { return m[i]; }
 
-    float& at(size_t i, size_t j) { return m[i].components[j]; }
-    const float& at(size_t i, size_t j) const { return m[i].components[j]; }
+    inline float& at(size_t i, size_t j) { return m[i].components[j]; }
+    inline const float& at(size_t i, size_t j) const { return m[i].components[j]; }
 
 private:
     vec3f_t m[3];
@@ -80,10 +80,10 @@ public:
         m[3] = vec4f_t(m30, m31, m32, m33);
     }
 
-    const vec4f_t& row(size_t i) const { return m[i]; }
+    inline const vec4f_t& row(size_t i) const { return m[i]; }
 
-    float& at(size_t i, size_t j) { return m[i].components[j]; }
-    const float& at(size_t i, size_t j) const { return m[i].components[j]; }
+    inline float& at(size_t i, size_t j) { return m[i].components[j]; }
+    inline const float& at(size_t i, size_t j) const { return m[i].components[j]; }
 
 private:
     vec4f_t m[4];
