@@ -23,7 +23,7 @@
 /**
  * Write void extent block bits for LDR mode and unused extent coordinates.
  */
-inline void encode_void_extent(vec3i_t color, PhysicalBlock* physical_block) {
+inline void encode_void_extent(const vec3i_t& color, PhysicalBlock* physical_block) {
     void_extent_to_physical(unorm8_to_unorm16(to_unorm8(color)), physical_block);
 }
 
@@ -144,7 +144,7 @@ void compress_block(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock* phy
 
 //suppost alpha
 
-inline void encode_void_extent(vec4i_t color, PhysicalBlock* physical_block) {
+inline void encode_void_extent(const vec4i_t& color, PhysicalBlock* physical_block) {
     void_extent_to_physical(unorm8_to_unorm16(to_unorm8(color)), physical_block);
 }
 
