@@ -60,7 +60,7 @@ inline void encode_luminance(const uint8_t texels[BLOCK_TEXEL_COUNT], PhysicalBl
     symbolic_to_physical2(color_endpoint_mode, endpoint_quant, weight_quant, partition_count, partition_index, endpoint_ise, endpoint_ise_count, weights_ise, weights_ise_count, physical_block);
 }
 
-inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec3f_t e0, vec3f_t e1, PhysicalBlock* physical_block) {
+inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec3f_t& e0, const vec3f_t& e1, PhysicalBlock* physical_block) {
     size_t partition_index = 0;
     size_t partition_count = 1;
 
@@ -163,7 +163,7 @@ inline bool is_alpha0(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4i_t& color) 
     return true;
 }
 
-inline void encode_rgba_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4f_t e0, vec4f_t e1, PhysicalBlock* physical_block) {
+inline void encode_rgba_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec4f_t& e0, const vec4f_t& e1, PhysicalBlock* physical_block) {
     size_t partition_index = 0;
     size_t partition_count = 1;
 

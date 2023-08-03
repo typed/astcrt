@@ -14,6 +14,11 @@
 #include "integer_sequence_encoding.h"
 #include "range.h"
 
+#ifdef _MSC_VER
+#   pragma warning(push)
+#   pragma warning(disable:4100)
+#endif
+
 struct PhysicalBlock {
     uint8_t data[BLOCK_BYTES];
 };
@@ -100,6 +105,10 @@ inline void symbolic_to_physical2(color_endpoint_mode_t color_endpoint_mode, ran
 
     reverse_bytes(weights_ise, weights_ise_count, pb->data + 15);
 }
+
+#ifdef _MSC_VER
+#   pragma warning(pop)
+#endif
 
 #endif
 

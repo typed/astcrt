@@ -8,6 +8,11 @@
 
 #include "dcheck.h"
 
+#ifdef _MSC_VER
+#   pragma warning(push)
+#   pragma warning(disable:4201)
+#endif
+
 template <typename T>
 union vec3_t {
 public:
@@ -295,6 +300,10 @@ inline T qd_to_line(const vec4_t<T>& m, const vec4_t<T>& k, T kk, const vec4_t<T
     vec4_t<T> q = k * t + m;
     return qd(p, q);
 }
+
+#ifdef _MSC_VER
+#   pragma warning(pop)
+#endif
 
 #endif
 

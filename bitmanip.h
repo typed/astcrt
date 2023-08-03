@@ -8,6 +8,11 @@
 
 #include "dcheck.h"
 
+#ifdef _MSC_VER
+#   pragma warning(push)
+#   pragma warning(disable:4100)
+#endif
+
 inline bool getbit(size_t number, size_t n) {
     return (number >> n) & 1;
 }
@@ -163,6 +168,10 @@ inline void copy_bytes(const uint8_t* source,
         orbits8_ptr(target, bitoffset + i * 8, source[i], 8);
     }
 }
+
+#ifdef _MSC_VER
+#   pragma warning(pop)
+#endif
 
 #endif
 
