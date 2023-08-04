@@ -33,7 +33,7 @@ inline void encode_luminance(const uint8_t texels[BLOCK_TEXEL_COUNT], PhysicalBl
 
     color_endpoint_mode_t color_endpoint_mode = CEM_LDR_LUMINANCE_DIRECT;
     range_t weight_quant = RANGE_32;
-    range_t endpoint_quant = endpoint_quantization(partition_count, weight_quant, color_endpoint_mode); //RANGE_256
+    range_t endpoint_quant = RANGE_256; //endpoint_quantization(partition_count, weight_quant, color_endpoint_mode);
 
     uint8_t l0 = 255;
     uint8_t l1 = 0;
@@ -66,7 +66,7 @@ inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT]
 
     color_endpoint_mode_t color_endpoint_mode = CEM_LDR_RGB_DIRECT;
     range_t weight_quant = RANGE_12;
-    range_t endpoint_quant = endpoint_quantization(partition_count, weight_quant, color_endpoint_mode); //RANGE_256
+    range_t endpoint_quant = RANGE_256; //endpoint_quantization(partition_count, weight_quant, color_endpoint_mode);
 
     vec3i_t endpoint_unquantized[2];
     const size_t endpoint_quantized_count = 6;
@@ -169,7 +169,7 @@ inline void encode_rgba_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT
 
     color_endpoint_mode_t color_endpoint_mode = CEM_LDR_RGBA_DIRECT;
     range_t weight_quant = RANGE_6;
-    range_t endpoint_quant = endpoint_quantization(partition_count, weight_quant, color_endpoint_mode); //RANGE_256
+    range_t endpoint_quant = RANGE_256; //endpoint_quantization(partition_count, weight_quant, color_endpoint_mode);
 
     vec4i_t endpoint_unquantized[2];
     const size_t endpoint_quantized_count = 8;

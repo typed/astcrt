@@ -3,7 +3,7 @@
 
 #ifdef RTTC_USE_ASTCRT
 
-const uint8_t integer_from_trits[3][3][3][3][3] = {
+static const uint8_t integer_from_trits[3][3][3][3][3] = {
     {
         {
             {
@@ -165,7 +165,7 @@ const uint8_t integer_from_trits[3][3][3][3][3] = {
     }
 };
 
-const uint8_t integer_from_quints[5][5][5] = {
+static const uint8_t integer_from_quints[5][5][5] = {
     {
         {0,1,2,3,4},
         {8,9,10,11,12},

@@ -17,7 +17,7 @@
 inline uint8_t quantize_weight(range_t weight_quant, size_t weight) {
     DCHECK(weight_quant <= RANGE_32);
     DCHECK(weight <= 1024);
-    return weight_quantize_table[weight_quant][weight];
+    return weight_quantize_table[weight_quantize_table_index[weight_quant]][weight];
 }
 
 /**
