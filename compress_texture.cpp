@@ -83,4 +83,21 @@ void compress_texture(const uint8_t* src, uint8_t* dst, int width_int, int heigh
     }
 }
 
+void test_compress_texture()
+{
+    unorm8_t Data[BLOCK_TEXEL_COUNT];
+    uint8_t DesData[BLOCK_TEXEL_COUNT];
+    static int s_inited = 0;
+    if (s_inited == 0) {
+        s_inited = 1;
+        srand((uint32_t)(size_t)&s_inited);
+    }
+    for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
+        for (size_t j = 0; j < 4; ++j) {
+            Data[i].components[j] = rand() % 256;
+        }
+    }
+    compress_texture((uint8_t*)&Data, DesData, BLOCK_WIDTH, BLOCK_HEIGHT, rand() % 2 == 0);
+}
+
 #endif

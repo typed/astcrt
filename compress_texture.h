@@ -16,6 +16,8 @@
  */
 void compress_texture(const uint8_t* src, uint8_t* dst, int width, int height, bool use_alpha = false);
 
+void test_compress_texture();
+
 #endif
 
 #endif  // ASTC_COMPRESS_TEXTURE_H_
