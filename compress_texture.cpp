@@ -46,10 +46,10 @@ void compress_texture(const uint8_t* src, uint8_t* dst, int width_int, int heigh
             *dst_re = physical_block_zero;
 
             if (use_alpha && has_transparent(texels)) {
-                compress_block_alpha(texels, dst_re);
+                compress_block_alpha(texels, *dst_re);
             }
             else {
-                compress_block(texels, dst_re);
+                compress_block(texels, *dst_re);
             }
 
             ++dst_re;

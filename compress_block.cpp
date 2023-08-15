@@ -23,11 +23,11 @@
 /**
  * Write void extent block bits for LDR mode and unused extent coordinates.
  */
-inline void encode_void_extent(const vec3i_t& color, PhysicalBlock* physical_block) {
+inline void encode_void_extent(const vec3i_t& color, PhysicalBlock& physical_block) {
     void_extent_to_physical(unorm8_to_unorm16(to_unorm8(color)), physical_block);
 }
 
-inline void encode_luminance(const uint8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock* physical_block) {
+inline void encode_luminance(const uint8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock& physical_block) {
     size_t partition_count = 1;
     size_t partition_index = 0;
 
@@ -60,7 +60,7 @@ inline void encode_luminance(const uint8_t texels[BLOCK_TEXEL_COUNT], PhysicalBl
     symbolic_to_physical2(color_endpoint_mode, endpoint_quant, weight_quant, partition_count, partition_index, endpoint_ise, endpoint_ise_count, weights_ise, weights_ise_count, physical_block);
 }
 
-inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec3f_t& e0, const vec3f_t& e1, PhysicalBlock* physical_block) {
+inline void encode_rgb_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec3f_t& e0, const vec3f_t& e1, PhysicalBlock& physical_block) {
     size_t partition_index = 0;
     size_t partition_count = 1;
 
@@ -115,7 +115,7 @@ inline bool is_greyscale(const unorm8_t texels[BLOCK_TEXEL_COUNT], uint8_t lumin
     return true;
 }
 
-void compress_block(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock* physical_block) {
+void compress_block(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock& physical_block) {
     {
         vec3i_t color;
         if (is_solid(texels, color)) {
@@ -144,7 +144,7 @@ void compress_block(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock* phy
 
 //suppost alpha
 
-inline void encode_void_extent(const vec4i_t& color, PhysicalBlock* physical_block) {
+inline void encode_void_extent(const vec4i_t& color, PhysicalBlock& physical_block) {
     void_extent_to_physical(unorm8_to_unorm16(to_unorm8(color)), physical_block);
 }
 
@@ -163,7 +163,7 @@ inline bool is_alpha0(const unorm8_t texels[BLOCK_TEXEL_COUNT], vec4i_t& color) 
     return true;
 }
 
-inline void encode_rgba_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec4f_t& e0, const vec4f_t& e1, PhysicalBlock* physical_block) {
+inline void encode_rgba_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT], const vec4f_t& e0, const vec4f_t& e1, PhysicalBlock& physical_block) {
     size_t partition_index = 0;
     size_t partition_count = 1;
 
@@ -190,7 +190,7 @@ inline void encode_rgba_single_partition(const unorm8_t texels[BLOCK_TEXEL_COUNT
     symbolic_to_physical2(color_endpoint_mode, endpoint_quant, weight_quant, partition_count, partition_index, endpoint_ise, endpoint_ise_count, weights_ise, weights_ise_count, physical_block);
 }
 
-void compress_block_alpha(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock* physical_block) {
+void compress_block_alpha(const unorm8_t texels[BLOCK_TEXEL_COUNT], PhysicalBlock& physical_block) {
 
     {
         vec4i_t color;

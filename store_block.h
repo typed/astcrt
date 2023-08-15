@@ -23,27 +23,27 @@ struct PhysicalBlock {
     uint8_t data[BLOCK_BYTES];
 };
 
-inline void void_extent_to_physical(unorm16_t color, PhysicalBlock* pb) {
-    pb->data[0] = 0xFC;
-    pb->data[1] = 0xFD;
-    pb->data[2] = 0xFF;
-    pb->data[3] = 0xFF;
-    pb->data[4] = 0xFF;
-    pb->data[5] = 0xFF;
-    pb->data[6] = 0xFF;
-    pb->data[7] = 0xFF;
+inline void void_extent_to_physical(unorm16_t color, PhysicalBlock& pb) {
+    pb.data[0] = 0xFC;
+    pb.data[1] = 0xFD;
+    pb.data[2] = 0xFF;
+    pb.data[3] = 0xFF;
+    pb.data[4] = 0xFF;
+    pb.data[5] = 0xFF;
+    pb.data[6] = 0xFF;
+    pb.data[7] = 0xFF;
 
-    setbytes2(pb->data, 8, color.channels.r);
-    setbytes2(pb->data, 10, color.channels.g);
-    setbytes2(pb->data, 12, color.channels.b);
-    setbytes2(pb->data, 14, color.channels.a);
+    setbytes2(pb.data, 8, color.channels.r);
+    setbytes2(pb.data, 10, color.channels.g);
+    setbytes2(pb.data, 12, color.channels.b);
+    setbytes2(pb.data, 14, color.channels.a);
 }
 
 inline void symbolic_to_physical2(color_endpoint_mode_t color_endpoint_mode, range_t endpoint_quant, range_t weight_quant, 
     size_t partition_count, size_t partition_index, const uint8_t endpoint_ise[], size_t endpoint_ise_count,
     // FIXME: +1 needed here because orbits_8ptr breaks when the offset reaches
     // the last byte which always happens if the weight mode is RANGE_32.
-    const uint8_t weights_ise[], size_t weights_ise_count, PhysicalBlock* pb) {
+    const uint8_t weights_ise[], size_t weights_ise_count, PhysicalBlock& pb) {
 
     DCHECK(weight_quant <= RANGE_32);
     DCHECK(endpoint_quant < RANGE_MAX);
@@ -84,26 +84,26 @@ inline void symbolic_to_physical2(color_endpoint_mode_t color_endpoint_mode, ran
     cem = multi_part ? cem << 2 : cem;
 
     // Block mode
-    orbits8_ptr(pb->data, 0, getbit(r, 1), 1);
-    orbits8_ptr(pb->data, 1, getbit(r, 2), 1);
-    orbits8_ptr(pb->data, 2, 0, 1);
-    orbits8_ptr(pb->data, 3, 0, 1);
-    orbits8_ptr(pb->data, 4, getbit(r, 0), 1);
-    orbits8_ptr(pb->data, 5, a, 2);
-    orbits8_ptr(pb->data, 7, b, 2);
-    orbits8_ptr(pb->data, 9, h, 1);
-    orbits8_ptr(pb->data, 10, d, 1);
+    orbits8_ptr(pb.data, 0, getbit(r, 1), 1);
+    orbits8_ptr(pb.data, 1, getbit(r, 2), 1);
+    orbits8_ptr(pb.data, 2, 0, 1);
+    orbits8_ptr(pb.data, 3, 0, 1);
+    orbits8_ptr(pb.data, 4, getbit(r, 0), 1);
+    orbits8_ptr(pb.data, 5, a, 2);
+    orbits8_ptr(pb.data, 7, b, 2);
+    orbits8_ptr(pb.data, 9, h, 1);
+    orbits8_ptr(pb.data, 10, d, 1);
 
     // Partitions
-    orbits8_ptr(pb->data, 11, part_value, 2);
-    orbits16_ptr(pb->data, 13, part_index, 10);
+    orbits8_ptr(pb.data, 11, part_value, 2);
+    orbits16_ptr(pb.data, 13, part_index, 10);
 
     // CEM
-    orbits8_ptr(pb->data, cem_offset, cem, cem_bits);
+    orbits8_ptr(pb.data, cem_offset, cem, cem_bits);
 
-    copy_bytes(endpoint_ise, endpoint_ise_count, pb->data, ced_offset);
+    copy_bytes(endpoint_ise, endpoint_ise_count, pb.data, ced_offset);
 
-    reverse_bytes(weights_ise, weights_ise_count, pb->data + 15);
+    reverse_bytes(weights_ise, weights_ise_count, pb.data + 15);
 }
 
 #ifdef _MSC_VER
