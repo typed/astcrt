@@ -57,6 +57,8 @@ void compress_texture(const uint8_t* src, uint8_t* dst, int width_int, int heigh
     }
 }
 
+#include <stdlib.h>
+#include <time.h>
 void test_compress_texture()
 {
     unorm8_t Data[BLOCK_TEXEL_COUNT];
@@ -64,7 +66,7 @@ void test_compress_texture()
     static int s_inited = 0;
     if (s_inited == 0) {
         s_inited = 1;
-        srand((uint32_t)(size_t)&s_inited);
+        srand((uint32_t)time(0));
     }
     for (size_t i = 0; i < BLOCK_TEXEL_COUNT; ++i) {
         for (size_t j = 0; j < 4; ++j) {
