@@ -15,7 +15,7 @@
  * Table that describes the number of trits or quints along with bits required
  * for storing each range.
  */
-const uint8_t bits_trits_quints_table[RANGE_MAX][3] = {
+static const uint8_t bits_trits_quints_table[RANGE_MAX][3] = {
     {1, 0, 0},  // RANGE_2
     {0, 1, 0},  // RANGE_3
     {2, 0, 0},  // RANGE_4
